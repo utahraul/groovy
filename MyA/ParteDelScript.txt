@@ -1,0 +1,25 @@
+// generate new email
+def random = new Random(new Date().getTime())
+def email = ("test" + Math.abs(random.nextInt() % 10000) + "@myaccount.com"); log.info email 
+// get password, name, surname1 and surname2 and dninumber property from TestCase Properties
+def password = testRunner.testCase.getPropertyValue( "password" ); log.info password 
+def name = testRunner.testCase.getPropertyValue( "name" ); log.info name 
+def surname1 = testRunner.testCase.getPropertyValue( "surname1" ); log.info surname1
+def surname2 = testRunner.testCase.getPropertyValue( "surname2" ); log.info surname2
+def dninumber = testRunner.testCase.getPropertyValue( "dninumber" ); log.info dninumber 
+properties.setPropertyValue("email", email);
+properties.saveProperties("email");
+//generate date ISO8601 for birthDate
+
+def birthDate = now.format("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"); log.info birthDate 
+//def birthDate = now.format("yyyy-MM-dd"); log.info birthDate 
+//def birthDate = "1980-01-01"; log.info birthDate 
+def gender = context.expand( '${Properties#gender}' )
+def country = context.expand( '${Properties#country}' )
+def documentType = context.expand( '${Properties#documentType}' )
+
+def addressSet = ""
+def encryptedPassword = "encryptedPassword"
+def loginEmail = "loginEmail"
+def phone1 = "phone1"
+def recordType = "recordType"
