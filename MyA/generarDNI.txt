@@ -1,0 +1,28 @@
+/*La letra del NIF se obtiene a partir de un algoritmo conocido 
+ * como módulo 23.
+ * El algoritmo consiste en aplicar la operación aritmética de 
+ * módulo 23 al número del DNI.
+ * El módulo 23 es el número entero obtenido como resto de la división
+ * entera del número del DNI entre 23.
+ * El resultado es un número comprendido entre el 0 y el 22.
+ * En base a una tabla conocida se asigna una letra.
+ * La combinación del DNI con esa letra es el NIF.
+ * 
+ * Tabla de asignación
+0    1    2    3    4    5    6    7    8    9    10    11    12    13    14    15    16    17    18    19    20    21    22
+T    R    W    A    G    M    Y    F    P    D    X    B    N    J    Z    S    Q    V    H    L    C    K    E
+*/
+// Primero generamos un Número aleatorio de 8 cifras
+def dni =Math.abs(new Random().nextInt() % 99999999 + 1000000)
+// Después definimos la tabla de asignación
+def NIF_STRING_ASOCIATION = "TRWAGMYFPDXBNJZSQVHLCKE";
+/*Generamos el NIF a partir del carácter que hay en la tabla de asignación después
+de hacer el modulo 23 del número pasamos como dni, 
+y lo mostramos por consola con log.info.*/
+def NIF = String.valueOf(dni) + NIF_STRING_ASOCIATION.charAt(dni % 23); //log.info NIF
+/* Las siguientes 2 líneas serán las encargadas da salvar el valor en una propiedad
+dentro de un test step de Properties */
+//def properties = (com.eviware.soapui.impl.wsdl.teststeps.WsdlPropertiesTestStep) context.getTestCase().getTestStepByName("Properties");
+//properties.setPropertyValue("NIF", NIF);
+//Por último, lo devolvemos por return, si es necesario
+return NIF;
